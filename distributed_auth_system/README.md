@@ -15,9 +15,8 @@ Dieses Projekt implementiert ein Proof-of-Concept (PoC) für ein **Authentifizie
 ## **Projektstruktur**
 ![alt text](image.png)
 
----
 
-## **Erklärungen zu den Abschnitten und Designentscheidungen**
+### **Erklärungen zu den Abschnitten und Designentscheidungen**
 
 ### **password_auth_service/**
 Dieser Ordner enthält den Code für die Username/Passwort-basierte Authentifizierung.
