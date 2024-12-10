@@ -57,7 +57,7 @@ Dokumentation des Projekts.
 ## **Voraussetzungen**
 
 1. **Docker**: Version 20.10 oder neuer.
-2. **Postman**: Für API-Tests (optional).
+2. **Postman**: Für API-Tests.
 3. **Git**: Zum Klonen des Repositories.
 
 ---
