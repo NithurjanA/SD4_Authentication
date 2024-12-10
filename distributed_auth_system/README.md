@@ -140,9 +140,9 @@ Nach dem erfolgreichen Start von `docker-compose up --build` sind die folgenden 
 
 ## **Schritt 3: Services testen**
 
-Bitte wie unter Kapitel Voraussetzung beschrieben zuerst Postman installieren, bevor diese Schritte durchgeführt werden.
+Bitte wie unter Kapitel Voraussetzungen beschrieben zuerst Postman installieren, bevor diese Schritte durchgeführt werden.
 
-Jetzt testen wir jeden Services nacheinander.
+Jetzt testen wir die einzelnen Services nacheinander.
 
 ### **1. Password Auth Service**
 
@@ -162,10 +162,10 @@ Erwartete Antwort:
 
 ![alt text](image-4.png)
 
-Wenn eine Angabe nicht korrekt eingegeben wurde oder fehlt, kommt unten beim Body eine Fehlermeldung. Ansonsten sollte es problemlos funktionieren.
+Wenn eine Angabe fehlt oder nicht korrekt eingegeben wurde, erscheint unten im Body eine Fehlermeldung. Wenn alles korrekt ist, sollte die Registrierung problemlos funktionieren.
 
 #### 2. Benutzerlogin
-Jetzt könnten wir noch verifizieren, ob der eben erstellte User mit seinem Passwort erfolgreich einloggen kann.
+Nachdem ein Benutzer registriert wurde, können wir verifizieren, ob der Login mit den angegebenen Daten erfolgreich ist.
 1. Postman öffnen
 2. Klicke auf "New" und wähle "HTTP".
 3. Wähle die Methode POST.
@@ -181,18 +181,17 @@ Erwartete Antwort:
 
 ![alt text](image-6.png)
 
-Wenn der Benutzername oder das Passwort nicht mit der registrierten User übereinstimmt, sollte die nachfolgende Fehlermeldung kommen:
+Wenn der Benutzername oder das Passwort nicht korrekt ist, erscheint eine Fehlermeldung wie im folgenden Screenshot:
 
 ![alt text](image-7.png)
-
-Das ware die erste Login mit Benutzername und Passwort.
 
 ---
 
 ### **2. Token Auth Service**
 
+Hier testen wir den Service, der JSON Web Tokens (JWT) generiert.
+
 #### 1. Token Generierung
-Jetzt testen wir den Service, der JSON Web Tokens (JWT) generiert.
 1. Postman öffnen
 2. Klicke auf "New" und wähle "HTTP".
 3. Wähle die Methode POST.
@@ -205,7 +204,7 @@ Es sollte ein Token,wie im nachfolgenden Bild ersichtlich ist, generiert und ang
 
 ![alt text](image-8.png)
 
-Diesen Token müsst kopieren und in der Zwischenablage speichern, da wir es für die Validierung benötigen.
+Kopiere den Token und speichere ihn in der Zwischenablage, da du ihn für den nächsten Schritt benötigst.
 
 #### 2. Token Validierung
 1. Postman öffnen
@@ -222,17 +221,18 @@ Erwartete Resultat:
 
 ![alt text](image-10.png)
 
-**"decoded"**: iat (Issued at) zeigt wenn der Token erstellt wurde und exp (Expiration) zeigt den Zeitpunkt, zu dem der Token abläuft.
+#### Beschreibung der Ausgabe:
+- **"decoded"**: iat (Issued at) zeigt wenn der Token erstellt wurde und exp (Expiration) zeigt den Zeitpunkt, zu dem der Token abläuft.
+- **"message"**: Token is valid Bedeutet, dass der übermittelte Token korrekt signiert ist und innerhalb seiner Gültigkeitsdauer liegt.
 
-**"message"**: Token is valid Bedeutet, dass der übermittelte Token korrekt signiert ist und innerhalb seiner Gültigkeitsdauer liegt.
-
-Wenn der Token nicht mit der zuvor generierten Token übereinstimmt, sollte die nachfolgende Meldung kommen:
+Wenn der Token nicht gültig ist, erscheint eine Fehlermeldung wie:
 
 ![alt text](image-11.png)
 
 ---
 
 ### **3. Sample Services**
+Mit einem gültigen Token können wir nun geschützte Daten abrufen.
 1. Postman öffnen
 2. Klicke auf "New" und wähle "HTTP".
 3. Wähle die Methode POST.
@@ -247,18 +247,21 @@ Erwartete Antwort:
 
 ![alt text](image-13.png)
 
+Der Zugriff wird nur gewährt, wenn der Token gültig ist.
+
 #### Wozu dieser Schritt:
 - **Zugriffskontrolle:** Der Endpunkt prüft, ob ein gültiges Token im Body der Anfrage übermittelt wurde. Nur wenn das Token gültig ist (z. B. nicht abgelaufen und korrekt signiert), erhält der Benutzer Zugriff auf die geschützten Daten.
 - **Sicherheit:** Die geschützten Daten werden nicht an Benutzer ausgegeben, die kein gültiges Token übermitteln. Dadurch wird sichergestellt, dass nur authentifizierte und autorisierte Benutzer auf die Daten zugreifen können.
 - **Praktisches Beispiel:** In einer realen Anwendung könnte dieser Endpunkt sensible Informationen wie Benutzerdaten, Rechnungen oder andere geschützte Ressourcen bereitstellen. Das Beispiel hier zeigt, dass ein gültiges Token den Zugriff auf eine einfache Antwort wie "Secure data with Token Auth" gewährt.
 
-Wenn der Token mit dem zuvor generierten Token nicht übereinstimmt, sollte eine Fehlermeldung erscheinen:
+Wenn der Token nicht gültig ist, wird die nachfolgende Fehlermeldung angezeigt:
 
 ![alt text](image-14.png)
 
 ---
 
 ### **4. Benutzerprofil abrufen**
+Hier rufen wir Benutzerprofile mit Benutzername und Passwort ab.
 1. Postman öffnen
 2. Klicke auf "New" und wähle "HTTP".
 3. Wähle die Methode POST.
@@ -273,7 +276,7 @@ Erwartete Resultat:
 
 ![alt text](image-16.png)
 
-Wenn der Benutzername oder das passwort nicht richtig ist, sollt eine Fehlermeldung erscheinen:
+Wenn Benutzername oder Passwort nicht korrekt sind, wird eine Fehlermeldung angezeigt:
 
 ![alt text](image-17.png)
 
