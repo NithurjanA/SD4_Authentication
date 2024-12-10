@@ -258,7 +258,7 @@ Wenn der Token mit dem zuvor generierten Token nicht übereinstimmt, sollte eine
 
 ---
 
-#### **4. Benutzerprofil abrufen**
+### **4. Benutzerprofil abrufen**
 1. Postman öffnen
 2. Klicke auf "New" und wähle "HTTP".
 3. Wähle die Methode POST.
