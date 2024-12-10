@@ -187,6 +187,8 @@ Wenn der Benutzername oder das Passwort nicht mit der registrierten User überei
 
 Das ware die erste Login mit Benutzername und Passwort.
 
+---
+
 ### **2. Token Auth Service**
 
 #### 1. Token Generierung
@@ -228,6 +230,8 @@ Wenn der Token nicht mit der zuvor generierten Token übereinstimmt, sollte die 
 
 ![alt text](image-11.png)
 
+---
+
 ### **3. Sample Services**
 1. Postman öffnen
 2. Klicke auf "New" und wähle "HTTP".
@@ -251,6 +255,8 @@ Wozu dieser Schritt:
 Wenn der Token mit dem zuvor generierten Token nicht übereinstimmt, sollte eine Fehlermeldung erscheinen:
 
 ![alt text](image-14.png)
+
+---
 
 #### **4. Benutzerprofil abrufen**
 1. Postman öffnen
