@@ -95,6 +95,7 @@ Jetzt sollten die Daten aus dem Git-Repository auf deinem Computer im angegebene
 
 ### Docker starten und ausführen
 1. Die Anwendung "Docker Desktop" starten, da es ausgeführt sein muss.
+
 ![alt text](image-1.png)
 
 2. Öffne die Eingabeaufforderung.
@@ -117,10 +118,6 @@ Nach dem erfolgreichen Start von `docker-compose up --build` sind die folgenden 
 - **Verfügbare Endpunkte:**
   - `POST /register`: Registriert neue Benutzer.
   - `POST /login`: Authentifiziert bestehende Benutzer.
-- **Statusmeldungen:**
-  - Der Service läuft im Debug-Modus.
-  - Hinweis: Die Warnung `This is a development server` bedeutet, dass der Server nicht für Produktionsumgebungen geeignet ist. Für Produktion wird ein WSGI-Server wie Gunicorn empfohlen.
-
 ---
 
 #### **2. Token Auth Service**
@@ -130,9 +127,6 @@ Nach dem erfolgreichen Start von `docker-compose up --build` sind die folgenden 
 - **Verfügbare Endpunkte:**
   - `POST /generate-token`: Generiert ein neues Token für autorisierte Benutzer.
   - `POST /validate-token`: Validiert ein bestehendes Token.
-- **Statusmeldungen:**
-  - Der Service läuft ebenfalls im Debug-Modus mit der gleichen Warnung wie der `Password Auth Service`.
-
 ---
 
 #### **3. Sample Service**
@@ -142,9 +136,6 @@ Nach dem erfolgreichen Start von `docker-compose up --build` sind die folgenden 
 - **Verfügbare Endpunkte:**
   - `POST /secure-data`: Zugriff auf geschützte Daten mit einem gültigen JWT.
   - `POST /profile`: Ruft Benutzerprofile basierend auf Username/Passwort-Authentifizierung ab.
-- **Statusmeldungen:**
-  - Der Service läuft im Debug-Modus mit ähnlichen Einschränkungen wie die anderen.
-
 ---
 
 ## **Schritt 3: Services testen**
@@ -162,10 +153,13 @@ Jetzt testen wir jeden Services nacheinander.
 4. Gib die URL ein: http://localhost:5000/register.
 5. Gehe zum Tab Body, wähle raw und stelle sicher, dass JSON ausgewählt ist.
 6. Füge diesen Inhalt in den Body ein mit der gewünschen Benutzername und Passwort:
+
 ![alt text](image-3.png)
+
 7. Klicke auf Send.
 
 Erwartete Antwort:
+
 ![alt text](image-4.png)
 
 Wenn eine Angabe nicht korrekt eingegeben wurde oder fehlt, kommt unten beim Body eine Fehlermeldung. Ansonsten sollte es problemlos funktionieren.
@@ -178,13 +172,17 @@ Jetzt könnten wir noch verifizieren, ob der eben erstellte User mit seinem Pass
 4. Gib die URL ein: http://localhost:5000/login.
 5. Gehe zum Tab Body, wähle raw und stelle sicher, dass JSON ausgewählt ist.
 6. Füge diesen Inhalt in den Body ein mit der korrekten Benutzername und Passwort:
+
 ![alt text](image-5.png)
+
 7. Klicke auf Send.
 
 Erwartete Antwort:
+
 ![alt text](image-6.png)
 
 Wenn der Benutzername oder das Passwort nicht mit der registrierten User übereinstimmt, sollte die nachfolgende Fehlermeldung kommen:
+
 ![alt text](image-7.png)
 
 Das ware die erste Login mit Benutzername und Passwort.
@@ -202,6 +200,7 @@ Jetzt testen wir den Service, der JSON Web Tokens (JWT) generiert.
 
 Erwartete Antwort:
 Es sollte ein Token,wie im nachfolgenden Bild ersichtlich ist, generiert und angezeigt werden.
+
 ![alt text](image-8.png)
 
 Diesen Token müsst kopieren und in der Zwischenablage speichern, da wir es für die Validierung benötigen.
@@ -213,10 +212,12 @@ Diesen Token müsst kopieren und in der Zwischenablage speichern, da wir es für
 4. Gib die URL ein: http://localhost:5001/validate-token.
 5. Gehe zum Tab Body, wähle raw, und stelle sicher, dass JSON ausgewählt ist.
 6. Füge diesen Inhalt in den Body ein, wobei der angezeigte Token durch den generierten Token, die du im vorherigen Schritt kopiert hast, ersetzt wird:
+
 ![alt text](image-9.png)
 7. Klicke auf Send.
 
 Erwartete Resultat:
+
 ![alt text](image-10.png)
 
 **"decoded"**: iat (Issued at) zeigt wenn der Token erstellt wurde und exp (Expiration) zeigt den Zeitpunkt, zu dem der Token abläuft.
@@ -224,6 +225,7 @@ Erwartete Resultat:
 **"message"**: Token is valid Bedeutet, dass der übermittelte Token korrekt signiert ist und innerhalb seiner Gültigkeitsdauer liegt.
 
 Wenn der Token nicht mit der zuvor generierten Token übereinstimmt, sollte die nachfolgende Meldung kommen:
+
 ![alt text](image-11.png)
 
 ### **3. Sample Services**
@@ -233,10 +235,12 @@ Wenn der Token nicht mit der zuvor generierten Token übereinstimmt, sollte die 
 4. Gib die URL ein: http://localhost:5002/secure-data.
 5. Gehe zum Tab Body, wähle raw, und stelle sicher, dass JSON ausgewählt ist.
 6. Füge diesen Inhalt in den Body ein, wobei der angezeigte Token durch den generierten Token, die du im vorherigen Schritt kopiert hast, ersetzt wird:
+
 ![alt text](image-12.png)
 7. Klicke auf Send.
 
 Erwartete Antwort:
+
 ![alt text](image-13.png)
 
 Wozu dieser Schritt:
@@ -245,6 +249,7 @@ Wozu dieser Schritt:
 **Praktisches Beispiel:** In einer realen Anwendung könnte dieser Endpunkt sensible Informationen wie Benutzerdaten, Rechnungen oder andere geschützte Ressourcen bereitstellen. Das Beispiel hier zeigt, dass ein gültiges Token den Zugriff auf eine einfache Antwort wie "Secure data with Token Auth" gewährt.
 
 Wenn der Token mit dem zuvor generierten Token nicht übereinstimmt, sollte eine Fehlermeldung erscheinen:
+
 ![alt text](image-14.png)
 
 #### **4. Benutzerprofil abrufen**
@@ -254,12 +259,15 @@ Wenn der Token mit dem zuvor generierten Token nicht übereinstimmt, sollte eine
 4. Gib die URL ein: http://localhost:5002/profile.
 5. Gehe zum Tab Body, wähle raw, und stelle sicher, dass JSON ausgewählt ist.
 6. Füge diesen Inhalt in den Body ein:
+
 ![alt text](image-15.png)
 7. Klicke auf Send.
 
 Erwartete Resultat:
+
 ![alt text](image-16.png)
 
 Wenn der Benutzername oder das passwort nicht richtig ist, sollt eine Fehlermeldung erscheinen:
+
 ![alt text](image-17.png)
 
