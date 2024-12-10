@@ -18,10 +18,10 @@ Dieses Projekt implementiert ein Proof-of-Concept (PoC) für ein **Authentifizie
 
 ### **Erklärungen zu den Abschnitten und Designentscheidungen**
 
-### **password_auth_service/**
+#### **password_auth_service/**
 Dieser Ordner enthält den Code für die Username/Passwort-basierte Authentifizierung.
 
-#### **Komponenten**:
+##### **Komponenten**:
 - **main.py**:  
   - Enthält die Endpunkte für die Benutzerregistrierung (`/register`) und die Benutzeranmeldung (`/login`).  
   - Diese Endpunkte validieren die eingegebenen Benutzerdaten und speichern sie sicher in einer Datenbank (oder in-memory als Proof-of-Concept).  
@@ -36,10 +36,10 @@ Dieser Ordner enthält den Code für die Username/Passwort-basierte Authentifizi
 
 ---
 
-### **sample_service/**
+#### **sample_service/**
 Dieser Ordner enthält den Beispielservice, der beide Authentifizierungsmethoden integriert.
 
-#### **Komponenten**:
+##### **Komponenten**:
 - **main.py**:  
   - Greift auf beide Authentifizierungsservices zu (Token- und Username/Passwort-basierte Authentifizierung).  
   - Endpunkte wie `/secure-data` prüfen die Gültigkeit eines JWTs, während `/profile` auf Benutzerdaten mit Username und Passwort zugreift.  
@@ -54,10 +54,10 @@ Dieser Ordner enthält den Beispielservice, der beide Authentifizierungsmethoden
 
 ---
 
-### **token_auth_service/**
+#### **token_auth_service/**
 Dieser Ordner enthält den Code für die JWT-basierte Authentifizierung.
 
-#### **Komponenten**:
+##### **Komponenten**:
 - **main.py**:  
   - Implementiert die Endpunkte `/generate-token` und `/validate-token`.  
   - **Designentscheidung**: 
@@ -72,16 +72,16 @@ Dieser Ordner enthält den Code für die JWT-basierte Authentifizierung.
 
 ---
 
-### **docker-compose.yml**
+#### **docker-compose.yml**
 Ermöglicht die gleichzeitige Ausführung aller Services in separaten Containern.
 
-#### **Designentscheidung**:
+##### **Designentscheidung**:
 - Koordiniert die Services (`password_auth_service`, `token_auth_service`, `sample_service`) und stellt sicher, dass sie in einer definierten Netzwerkumgebung kommunizieren können.
 - **Vorteil**: Entwickler können die gesamte Anwendung mit einem einzigen Befehl starten und testen.
 
 ---
 
-### **README.md**
+#### **README.md**
 Dokumentiert das Projekt, einschließlich:
 - **Beschreibung der Authentifizierungsmethoden**: Erklärt die Verwendung von Tokens und Username/Passwort.
 - **Schritte zur Einrichtung**: Führt durch die Installation der Abhängigkeiten, den Start der Services und das Testen mit Postman.
