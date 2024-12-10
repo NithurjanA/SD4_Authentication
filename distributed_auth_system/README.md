@@ -17,42 +17,77 @@ Dieses Projekt implementiert ein Proof-of-Concept (PoC) für ein **Authentifizie
 
 ---
 
-## **Erklärungen zu den Abschnitten**
+## **Erklärungen zu den Abschnitten und Designentscheidungen**
 
 ### **password_auth_service/**
 Dieser Ordner enthält den Code für die Username/Passwort-basierte Authentifizierung.
 
-- **main.py**: Der Hauptcode, der die Endpunkte für Benutzerregistrierung und -Authentifizierung implementiert.
-- **requirements.txt**: Die benötigten Python-Abhängigkeiten für diesen Service.
-- **Dockerfile**: Zum Containerisieren des Services.
+#### **Komponenten**:
+- **main.py**:  
+  - Enthält die Endpunkte für die Benutzerregistrierung (`/register`) und die Benutzeranmeldung (`/login`).  
+  - Diese Endpunkte validieren die eingegebenen Benutzerdaten und speichern sie sicher in einer Datenbank (oder in-memory als Proof-of-Concept).  
+  - **Designentscheidung**: Passwörter werden mit einer Hashing-Funktion (`werkzeug.security`) gespeichert, um sicherzustellen, dass sie nicht im Klartext vorliegen. Dies schützt vor Datenlecks und macht kompromittierte Passwörter schwer zugänglich.
+
+- **requirements.txt**:  
+  - Listet die Python-Bibliotheken, die für diesen Service erforderlich sind, wie `Flask` und `Werkzeug`.
+
+- **Dockerfile**:  
+  - Definiert die Konfiguration, um den Service in einem Docker-Container auszuführen.  
+  - **Designentscheidung**: Durch die Containerisierung wird sichergestellt, dass der Service in einer isolierten Umgebung unabhängig von der Host-Konfiguration läuft.
 
 ---
 
 ### **sample_service/**
 Dieser Ordner enthält den Beispielservice, der beide Authentifizierungsmethoden integriert.
 
-- **main.py**: Der Hauptcode, der auf die beiden Authentifizierungsservices zugreift.
-- **requirements.txt**: Die benötigten Python-Abhängigkeiten.
-- **Dockerfile**: Zum Containerisieren des Services.
+#### **Komponenten**:
+- **main.py**:  
+  - Greift auf beide Authentifizierungsservices zu (Token- und Username/Passwort-basierte Authentifizierung).  
+  - Endpunkte wie `/secure-data` prüfen die Gültigkeit eines JWTs, während `/profile` auf Benutzerdaten mit Username und Passwort zugreift.  
+  - **Designentscheidung**: Dieser Service zeigt, wie beide Authentifizierungsmethoden kombiniert und in einer Anwendung verwendet werden können.
+
+- **requirements.txt**:  
+  - Listet die Abhängigkeiten, die für den Beispielservice benötigt werden, einschließlich Bibliotheken zur Kommunikation mit den Authentifizierungsservices.
+
+- **Dockerfile**:  
+  - Containerisiert den Beispielservice, um eine konsistente Umgebung für die Ausführung zu gewährleisten.  
+  - **Designentscheidung**: Dieser Ansatz ermöglicht, den Beispielservice unabhängig von den Authentifizierungsservices auszuführen und zu testen.
 
 ---
 
 ### **token_auth_service/**
 Dieser Ordner enthält den Code für die JWT-basierte Authentifizierung.
 
-- **main.py**: Der Hauptcode, der die Endpunkte für Token-Generierung und -Validierung implementiert.
-- **requirements.txt**: Die benötigten Python-Abhängigkeiten für diesen Service.
-- **Dockerfile**: Zum Containerisieren des Services.
+#### **Komponenten**:
+- **main.py**:  
+  - Implementiert die Endpunkte `/generate-token` und `/validate-token`.  
+  - **Designentscheidung**: 
+    - Tokens werden mit einer Signatur (HMAC-SHA256) generiert, um ihre Integrität zu gewährleisten.  
+    - Claims wie `iat` (Issued At) und `exp` (Expiration) werden genutzt, um sicherzustellen, dass Tokens zeitlich eingeschränkt gültig sind.
+
+- **requirements.txt**:  
+  - Enthält die Bibliotheken, die für die Implementierung der Token-Authentifizierung erforderlich sind, wie `PyJWT`.
+
+- **Dockerfile**:  
+  - Containerisiert den Service, um sicherzustellen, dass die Token-Verarbeitung unabhängig von anderen Services funktioniert.
 
 ---
 
 ### **docker-compose.yml**
-Ermöglicht die gleichzeitige Ausführung aller Services in Containern.
+Ermöglicht die gleichzeitige Ausführung aller Services in separaten Containern.
+
+#### **Designentscheidung**:
+- Koordiniert die Services (`password_auth_service`, `token_auth_service`, `sample_service`) und stellt sicher, dass sie in einer definierten Netzwerkumgebung kommunizieren können.
+- **Vorteil**: Entwickler können die gesamte Anwendung mit einem einzigen Befehl starten und testen.
 
 ---
 
 ### **README.md**
-Dokumentation des Projekts.
+Dokumentiert das Projekt, einschließlich:
+- **Beschreibung der Authentifizierungsmethoden**: Erklärt die Verwendung von Tokens und Username/Passwort.
+- **Schritte zur Einrichtung**: Führt durch die Installation der Abhängigkeiten, den Start der Services und das Testen mit Postman.
+- **Designentscheidungen**: Bietet Hintergrundinformationen zu den gewählten Technologien und ihrer Implementierung.
+
 
 ---
 
@@ -279,4 +314,114 @@ Erwartete Resultat:
 Wenn Benutzername oder Passwort nicht korrekt sind, wird eine Fehlermeldung angezeigt:
 
 ![alt text](image-17.png)
+
+---
+
+## Trade-offs und Herausforderungen der Authentifizierungsmethoden
+
+In diesem Projekt werden zwei Authentifizierungsmethoden verwendet: **Token-basierte Authentifizierung** und **Username/Passwort-basierte Authentifizierung**. Beide Ansätze haben spezifische Vor- und Nachteile, die bei der Auswahl der geeigneten Methode in verteilten Systemen berücksichtigt werden müssen.
+
+### Token-basierte Authentifizierung
+
+**Vorteile:**
+- **Skalierbarkeit:**
+  - Tokens können wiederverwendet werden, ohne dass der Authentifizierungsserver bei jeder Anfrage belastet wird.
+  - Ideal für hochfrequentierte Systeme und Microservices-Architekturen.
+- **Effizienz:**
+  - Nach der ersten Authentifizierung können Clients einfach das Token mit jeder Anfrage senden, wodurch die Latenzzeiten reduziert werden.
+- **Flexibilität:**
+  - Tokens enthalten Claims (z. B. `iat` und `exp`), die zusätzliche Informationen über den Benutzer und den Token bereitstellen. Dadurch wird eine granulare Zugriffskontrolle ermöglicht.
+
+**Nachteile:**
+- **Sicherheitsrisiken:**
+  - Wenn ein Token kompromittiert wird (z. B. durch Abfangen), kann ein Angreifer auf geschützte Ressourcen zugreifen, bis der Token abläuft.
+  - Zusätzliche Sicherheitsmaßnahmen wie Token-Revocation oder kurze Ablaufzeiten (`exp`) sind erforderlich.
+- **Komplexität:**
+  - Die Implementierung von Mechanismen wie Token-Erstellung, -Validierung und -Widerruf erfordert zusätzliche Entwicklungsressourcen.
+
+---
+
+### Username/Passwort-basierte Authentifizierung
+
+**Vorteile:**
+- **Einfachheit:**
+  - Die Implementierung ist unkompliziert und für viele Entwickler vertraut.
+  - Es sind keine zusätzlichen Mechanismen wie Token-Management erforderlich.
+- **Direkte Kontrolle:**
+  - Benutzeranmeldedaten werden bei jeder Anfrage direkt überprüft, was besonders in kleineren Anwendungen ausreichend ist.
+
+**Nachteile:**
+- **Geringere Skalierbarkeit:**
+  - Jede Anfrage erfordert eine erneute Validierung der Benutzeranmeldeinformationen, was den Server bei hoher Last stark belasten kann.
+- **Erhöhtes Risiko bei der Übertragung:**
+  - Benutzeranmeldedaten müssen bei jeder Anfrage über das Netzwerk gesendet werden. Ohne sichere Verbindungen (z. B. HTTPS) besteht ein hohes Risiko des Abfangens (Man-in-the-Middle-Angriffe).
+
+---
+
+### Zusammenfassung der Herausforderungen
+
+- **Leistung vs. Sicherheit:**  
+  Während Token-basierte Authentifizierung leistungsfähiger ist, erfordert sie zusätzliche Sicherheitsmechanismen, um Missbrauch zu verhindern.
+
+- **Einsatzszenarien:**  
+  Die Wahl der Methode hängt von den Anforderungen ab:
+  - **Token-basierte Authentifizierung:** Geeignet für verteilte Systeme mit hoher Last und mehreren Microservices.
+  - **Username/Passwort-basierte Authentifizierung:** Ideal für einfache oder zentralisierte Anwendungen.
+
+---
+
+## Token Management-Strategie
+
+Das Projekt verwendet **JSON Web Tokens (JWT)** zur Token-basierten Authentifizierung. Die Tokens sind **signiert**, aber nicht verschlüsselt, um eine Balance zwischen Sicherheit und Effizienz zu gewährleisten.
+
+### Eigenschaften der Tokens
+
+1. **Signatur (HMAC-SHA256):**
+   - Tokens werden mit dem Algorithmus **HS256** signiert, um die **Integrität** des Inhalts zu gewährleisten.
+   - Die Signatur garantiert, dass der Token-Inhalt (Header und Payload) nicht manipuliert wurde.
+   - **Warum keine Verschlüsselung?**
+     - Da der Token keine sensiblen Informationen enthält (wie Passwörter), ist eine Verschlüsselung nicht erforderlich.
+     - Die Signatur reicht aus, um sicherzustellen, dass der Token unverändert bleibt.
+
+2. **Claims im Token:**
+   - **`iat` (Issued At):**
+     - Gibt an, wann der Token erstellt wurde (Unix-Zeitstempel).
+     - Dieser Claim stellt sicher, dass der Token nicht vor einer bestimmten Zeit gültig ist.
+     - Beispiel: `"iat": 1702213200` (entspricht 10. Dezember 2024, 18:00 Uhr UTC).
+   - **`exp` (Expiration):**
+     - Gibt das Ablaufdatum des Tokens an.
+     - Nach dem angegebenen Zeitpunkt wird der Token als ungültig betrachtet und muss erneuert werden.
+     - Dieser Claim minimiert das Risiko, dass ein kompromittierter Token langfristig missbraucht wird.
+     - Beispiel: `"exp": 1702216800` (entspricht 10. Dezember 2024, 19:00 Uhr UTC).
+
+---
+
+### Warum diese Strategie?
+
+1. **Effizienz:**
+   - Signierte Tokens benötigen weniger Rechenressourcen als verschlüsselte Tokens und sind daher ideal für skalierbare Systeme.
+   - Clients können den Token wiederholt verwenden, ohne sich bei jedem API-Aufruf neu zu authentifizieren.
+
+2. **Sicherheit:**
+   - Die Claims `iat` und `exp` helfen, den Missbrauch von Tokens zu minimieren:
+     - **`iat`** verhindert, dass ein Token vor seiner Erstellung verwendet wird.
+     - **`exp`** stellt sicher, dass Tokens nach einer festgelegten Zeit ablaufen und reduziert die Auswirkungen von gestohlenen Tokens.
+
+3. **Flexibilität:**
+   - Mit Claims wie `iat` und `exp` kann die Gültigkeit eines Tokens dynamisch gesteuert werden.
+   - Weitere Claims können hinzugefügt werden, z. B. Benutzerrollen (`role`) oder Zugriffsrechte (`scope`).
+
+---
+
+### Mögliche Erweiterungen
+
+1. **Token-Revocation:**
+   - Ergänzung einer Blacklist, um Tokens vor Ablaufzeit ungültig zu machen.
+   - Nützlich in Szenarien, in denen ein Benutzer manuell abgemeldet wird oder ein Token kompromittiert wurde.
+
+2. **Kurzfristige Tokens und Refresh Tokens:**
+   - Einsatz von kurzen Ablaufzeiten für Access Tokens.
+   - Einführung von Refresh Tokens, um neue Access Tokens zu generieren, ohne den Benutzer erneut zu authentifizieren.
+
+Diese Strategie stellt eine sichere und flexible Implementierung der Token-basierten Authentifizierung dar und kann je nach Bedarf erweitert werden.
 
