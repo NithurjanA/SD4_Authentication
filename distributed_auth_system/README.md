@@ -84,7 +84,8 @@ Dokumentation des Projekts.
    cd pfad/zum/ordner
 
 3. Clone das Repository mit folgendem Befehl:
-git clone https://github.com/NithurjanA/SD4_Authentication.git
+    ```bash
+    git clone https://github.com/NithurjanA/SD4_Authentication.git
 
 4. Git erstellt automatisch einen neuen Ordner mit dem Namen des Repositories (SD4_Authentication) und lädt alle Dateien und die Versionshistorie in diesen Ordner.
 
