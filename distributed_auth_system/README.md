@@ -14,7 +14,6 @@ Dieses Projekt implementiert ein Proof-of-Concept (PoC) für ein **Authentifizie
 
 ## **Projektstruktur**
 ![alt text](image.png)
-*Abbildung: Ordnerstruktur des Projekts*
 
 ---
 
