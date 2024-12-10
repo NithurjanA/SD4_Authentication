@@ -1,28 +1,27 @@
 # Authentication Service
 
-Dieses Projekt implementiert ein Proof-of-Concept (PoC) für ein **Authentifizierungssystem** in einer verteilten Anwendung. Es unterstützt zwei Authentifizierungsmethoden: **Token-basierte Authentifizierung** und **Username/Passwort-basierte Authentifizierung**. 
+Dieses Projekt implementiert ein Proof-of-Concept (PoC) für ein **Authentifizierungssystem** in einer verteilten Anwendung. Es bietet zwei Authentifizierungsmethoden: **Token-basierte Authentifizierung** und **Username/Passwort-basierte Authentifizierung**.
 
-## Features
+---
 
-- **Token-basierte Authentifizierung**
-  - Generiert JWT-Tokens mit Ablaufzeit und überprüft deren Gültigkeit.
-- **Username/Passwort-basierte Authentifizierung**
-  - Authentifiziert Benutzer mit einem Benutzernamen und Passwort.
-  - Speichert Passwörter sicher mit Passwort-Hashing (Werkzeug).
+## **Projektübersicht**
 
-## Voraussetzungen
+- **Ziel:** Demonstration von Authentifizierungstechniken in einer verteilten Architektur.
+- **Ansatz:** Vergleich und Integration von Token- und Username/Passwort-basierten Authentifizierungsmethoden.
+- **Ergebnis:** Ein vollständig funktionales, containerisiertes System, das die Grundlagen moderner Authentifizierungsmethoden zeigt.
 
-Stelle sicher, dass du die folgenden Programme installiert hast:
+---
 
-- [Python 3.10 oder höher](https://www.python.org/downloads/)
-- [pip (Python Package Installer)](https://pip.pypa.io/en/stable/)
+## **Projektstruktur**
+distributed_auth_system/ │ ├── token_auth_service/ # Service für JWT-basierte Authentifizierung │ ├── main.py # Hauptcode │ ├── requirements.txt # Abhängigkeiten │ └── Dockerfile # Docker-Konfiguration │ ├── password_auth_service/ # Service für Username/Passwort-Authentifizierung │ ├── main.py # Hauptcode │ ├── requirements.txt # Abhängigkeiten │ └── Dockerfile # Docker-Konfiguration │ ├── sample_service/ # Beispielservice, der beide Methoden verwendet │ ├── main.py # Hauptcode │ ├── requirements.txt # Abhängigkeiten │ └── Dockerfile # Docker-Konfiguration │ ├── docker-compose.yml # Orchestrierung aller Services └── README.md # Projektdokumentation
 
-Zusätzlich benötigst du die Python-Bibliotheken **Flask** und **Werkzeug**. Diese kannst du installieren, wie in der Anleitung unten beschrieben.
 
-## Installation
+---
 
-1. Klone das Repository (falls es online gespeichert ist) oder lade die Projektdateien herunter.
+## **Voraussetzungen**
 
-   ```bash
-   git clone <repository-url>
-   cd Authentication
+1. **Docker**: Version 20.10 oder neuer.
+2. **Postman**: Für API-Tests (optional).
+3. **Git**: Zum Klonen des Repositories.
+
+---
