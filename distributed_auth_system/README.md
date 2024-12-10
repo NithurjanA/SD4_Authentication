@@ -146,7 +146,7 @@ Jetzt testen wir jeden Services nacheinander.
 
 ### **1. Password Auth Service**
 
-#### Benutzerregistierung
+#### 1. Benutzerregistierung
 1. Postman öffnen
 2. Klicke auf "New" und wähle "HTTP".
 3. Wähle die Methode POST.
@@ -164,7 +164,7 @@ Erwartete Antwort:
 
 Wenn eine Angabe nicht korrekt eingegeben wurde oder fehlt, kommt unten beim Body eine Fehlermeldung. Ansonsten sollte es problemlos funktionieren.
 
-#### Benutzerlogin
+#### 2. Benutzerlogin
 Jetzt könnten wir noch verifizieren, ob der eben erstellte User mit seinem Passwort erfolgreich einloggen kann.
 1. Postman öffnen
 2. Klicke auf "New" und wähle "HTTP".
@@ -187,9 +187,9 @@ Wenn der Benutzername oder das Passwort nicht mit der registrierten User überei
 
 Das ware die erste Login mit Benutzername und Passwort.
 
-### **2. Token Auth Service **
+### **2. Token Auth Service**
 
-#### Token Generierung
+#### 1. Token Generierung
 Jetzt testen wir den Service, der JSON Web Tokens (JWT) generiert.
 1. Postman öffnen
 2. Klicke auf "New" und wähle "HTTP".
@@ -205,7 +205,7 @@ Es sollte ein Token,wie im nachfolgenden Bild ersichtlich ist, generiert und ang
 
 Diesen Token müsst kopieren und in der Zwischenablage speichern, da wir es für die Validierung benötigen.
 
-#### Token Validierung
+#### 2. Token Validierung
 1. Postman öffnen
 2. Klicke auf "New" und wähle "HTTP".
 3. Wähle die Methode POST.
