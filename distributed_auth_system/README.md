@@ -411,16 +411,3 @@ Das Projekt verwendet **JSON Web Tokens (JWT)** zur Token-basierten Authentifizi
    - Weitere Claims können hinzugefügt werden, z. B. Benutzerrollen (`role`) oder Zugriffsrechte (`scope`).
 
 ---
-
-### Mögliche Erweiterungen
-
-1. **Token-Revocation:**
-   - Ergänzung einer Blacklist, um Tokens vor Ablaufzeit ungültig zu machen.
-   - Nützlich in Szenarien, in denen ein Benutzer manuell abgemeldet wird oder ein Token kompromittiert wurde.
-
-2. **Kurzfristige Tokens und Refresh Tokens:**
-   - Einsatz von kurzen Ablaufzeiten für Access Tokens.
-   - Einführung von Refresh Tokens, um neue Access Tokens zu generieren, ohne den Benutzer erneut zu authentifizieren.
-
-Diese Strategie stellt eine sichere und flexible Implementierung der Token-basierten Authentifizierung dar und kann je nach Bedarf erweitert werden.
-
