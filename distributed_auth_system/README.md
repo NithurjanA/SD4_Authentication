@@ -247,10 +247,10 @@ Erwartete Antwort:
 
 ![alt text](image-13.png)
 
-Wozu dieser Schritt:
-**Zugriffskontrolle:** Der Endpunkt prüft, ob ein gültiges Token im Body der Anfrage übermittelt wurde. Nur wenn das Token gültig ist (z. B. nicht abgelaufen und korrekt signiert), erhält der Benutzer Zugriff auf die geschützten Daten.
-**Zugriffskontrolle:** Die geschützten Daten werden nicht an Benutzer ausgegeben, die kein gültiges Token übermitteln. Dadurch wird sichergestellt, dass nur authentifizierte und autorisierte Benutzer auf die Daten zugreifen können.
-**Praktisches Beispiel:** In einer realen Anwendung könnte dieser Endpunkt sensible Informationen wie Benutzerdaten, Rechnungen oder andere geschützte Ressourcen bereitstellen. Das Beispiel hier zeigt, dass ein gültiges Token den Zugriff auf eine einfache Antwort wie "Secure data with Token Auth" gewährt.
+#### Wozu dieser Schritt:
+- **Zugriffskontrolle:** Der Endpunkt prüft, ob ein gültiges Token im Body der Anfrage übermittelt wurde. Nur wenn das Token gültig ist (z. B. nicht abgelaufen und korrekt signiert), erhält der Benutzer Zugriff auf die geschützten Daten.
+- **Sicherheit:** Die geschützten Daten werden nicht an Benutzer ausgegeben, die kein gültiges Token übermitteln. Dadurch wird sichergestellt, dass nur authentifizierte und autorisierte Benutzer auf die Daten zugreifen können.
+- **Praktisches Beispiel:** In einer realen Anwendung könnte dieser Endpunkt sensible Informationen wie Benutzerdaten, Rechnungen oder andere geschützte Ressourcen bereitstellen. Das Beispiel hier zeigt, dass ein gültiges Token den Zugriff auf eine einfache Antwort wie "Secure data with Token Auth" gewährt.
 
 Wenn der Token mit dem zuvor generierten Token nicht übereinstimmt, sollte eine Fehlermeldung erscheinen:
 
