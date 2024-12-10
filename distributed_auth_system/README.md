@@ -17,15 +17,6 @@ Dieses Projekt implementiert ein Proof-of-Concept (PoC) für ein **Authentifizie
 
 ## **Erklärungen zu den Abschnitten**
 
-### **token_auth_service/**
-Dieser Ordner enthält den Code für die JWT-basierte Authentifizierung.
-
-- **main.py**: Der Hauptcode, der die Endpunkte für Token-Generierung und -Validierung implementiert.
-- **requirements.txt**: Die benötigten Python-Abhängigkeiten für diesen Service.
-- **Dockerfile**: Zum Containerisieren des Services.
-
----
-
 ### **password_auth_service/**
 Dieser Ordner enthält den Code für die Username/Passwort-basierte Authentifizierung.
 
@@ -40,6 +31,15 @@ Dieser Ordner enthält den Beispielservice, der beide Authentifizierungsmethoden
 
 - **main.py**: Der Hauptcode, der auf die beiden Authentifizierungsservices zugreift.
 - **requirements.txt**: Die benötigten Python-Abhängigkeiten.
+- **Dockerfile**: Zum Containerisieren des Services.
+
+---
+
+### **token_auth_service/**
+Dieser Ordner enthält den Code für die JWT-basierte Authentifizierung.
+
+- **main.py**: Der Hauptcode, der die Endpunkte für Token-Generierung und -Validierung implementiert.
+- **requirements.txt**: Die benötigten Python-Abhängigkeiten für diesen Service.
 - **Dockerfile**: Zum Containerisieren des Services.
 
 ---
