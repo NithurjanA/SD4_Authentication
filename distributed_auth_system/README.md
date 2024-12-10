@@ -14,6 +14,9 @@ Dieses Projekt implementiert ein Proof-of-Concept (PoC) für ein **Authentifizie
 
 ## **Projektstruktur**
 ![alt text](image.png)
+*Abbildung: Ordnerstruktur des Projekts*
+
+---
 
 ## **Erklärungen zu den Abschnitten**
 
@@ -56,8 +59,36 @@ Dokumentation des Projekts.
 
 ## **Voraussetzungen**
 
-1. **Docker**: Version 20.10 oder neuer.
-2. **Postman**: Für API-Tests.
-3. **Git**: Zum Klonen des Repositories.
+1. **[Docker](https://www.docker.com/products/docker-desktop/)**: Version 20.10 oder neuer.  
+   Lade Docker Desktop für Windows, macOS oder Linux herunter, um Container zu erstellen und auszuführen.
+
+2. **[Postman](https://www.postman.com/downloads/)**: Für API-Tests.  
+   Lade Postman herunter, um HTTP-Anfragen an deine API zu senden und die Antworten zu testen.
+
+3. **[Git](https://git-scm.com/downloads/)**: Zum Klonen des Repositories.  
+   Installiere Git, um Repositories von Plattformen wie GitHub zu clonen und Änderungen zu verwalten.
 
 ---
+
+## **Git Repository Clonen**
+
+**Wichtig:** Bitte zuerst Git installieren, bevor diese Schritte durchgeführt werden.
+
+### Schritt: Repository clonen
+
+1. Öffne das Terminal oder die Eingabeaufforderung.  
+
+2. Navigiere zu dem Ordner, in dem du das Repository speichern möchtest:  
+
+   ```bash
+   cd pfad/zum/ordner
+
+3. Clone das Repository mit folgendem Befehl:
+git clone https://github.com/NithurjanA/SD4_Authentication.git
+
+4. Git erstellt automatisch einen neuen Ordner mit dem Namen des Repositories (SD4_Authentication) und lädt alle Dateien und die Versionshistorie in diesen Ordner.
+
+Jetzt sollten die Daten aus dem Git-Repository auf deinem Computer im angegebenen Pfad heruntergeladen worden sein, und du kannst mit dem nächsten Schritt fortfahren.
+
+---
+
