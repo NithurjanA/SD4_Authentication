@@ -143,7 +143,7 @@ Jetzt sollten die Daten aus dem Git-Repository auf deinem Computer im angegebene
 
 ### **Verfügbare Services**
 
-Nach dem erfolgreichen Start von `docker-compose up --build` sind die folgenden Services aktiv:
+Nach dem erfolgreichen Start von `docker-compose up --build` sind die folgenden Services aktiv (**Achtung:** Die Services sind nicht über die angegebenen URL aufrufbar. Diese URLs werden dann später für Postman verwendet)
 
 #### **1. Password Auth Service**
 - **URL:** [http://localhost:5000](http://localhost:5000)
