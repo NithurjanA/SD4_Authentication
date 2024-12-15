@@ -13,7 +13,7 @@ Dieses Projekt implementiert ein Proof-of-Concept (PoC) für ein **Authentifizie
 ---
 
 ## **Projektstruktur**
-![alt text](image.png)
+![alt text](./images/image.png)
 
 
 ### **Erklärungen zu den Abschnitten und Designentscheidungen**
@@ -130,12 +130,12 @@ Jetzt sollten die Daten aus dem Git-Repository auf deinem Computer im angegebene
 ### Docker starten und ausführen
 1. Die Anwendung "Docker Desktop" starten, da es ausgeführt sein muss.
 
-![alt text](image-1.png)
+![alt text](./images/image-1.png)
 
 2. Öffne die Eingabeaufforderung.
 
 3. Navigiere zum Pfad wo Github heruntergeladen wurde und gehe eine Ebene im Ordner SD4_Authentication rein zu "distributed_auth_system". Ungefähr so sollte sollte es aussehen (je nach Speicherort sieht es bei dir anders aus):
-![alt text](image-2.png)
+![alt text](./images/image-2.png)
 
 4. Führe den folgenden Befehl aus, um alle Services zu bauen und zu starten:
     ```bash
@@ -188,13 +188,13 @@ Jetzt testen wir die einzelnen Services nacheinander.
 5. Gehe zum Tab Body, wähle raw und stelle sicher, dass JSON ausgewählt ist.
 6. Füge diesen Inhalt in den Body ein mit der gewünschen Benutzername und Passwort:
 
-![alt text](image-3.png)
+![alt text](./images/image-3.png)
 
 7. Klicke auf Send.
 
 Erwartete Antwort:
 
-![alt text](image-4.png)
+![alt text](./images/image-4.png)
 
 Wenn eine Angabe fehlt oder nicht korrekt eingegeben wurde, erscheint unten im Body eine Fehlermeldung. Wenn alles korrekt ist, sollte die Registrierung problemlos funktionieren.
 
@@ -207,17 +207,17 @@ Nachdem ein Benutzer registriert wurde, können wir verifizieren, ob der Login m
 5. Gehe zum Tab Body, wähle raw und stelle sicher, dass JSON ausgewählt ist.
 6. Füge diesen Inhalt in den Body ein mit der korrekten Benutzername und Passwort:
 
-![alt text](image-5.png)
+![alt text](./images/image-5.png)
 
 7. Klicke auf Send.
 
 Erwartete Antwort:
 
-![alt text](image-6.png)
+![alt text](./images/image-6.png)
 
 Wenn der Benutzername oder das Passwort nicht korrekt ist, erscheint eine Fehlermeldung wie im folgenden Screenshot:
 
-![alt text](image-7.png)
+![alt text](./images/image-7.png)
 
 ---
 
@@ -236,7 +236,7 @@ Hier testen wir den Service, der JSON Web Tokens (JWT) generiert.
 Erwartete Antwort:
 Es sollte ein Token,wie im nachfolgenden Bild ersichtlich ist, generiert und angezeigt werden.
 
-![alt text](image-8.png)
+![alt text](./images/image-8.png)
 
 Kopiere den Token und speichere ihn in der Zwischenablage, da du ihn für den nächsten Schritt benötigst.
 
@@ -248,12 +248,12 @@ Kopiere den Token und speichere ihn in der Zwischenablage, da du ihn für den n�
 5. Gehe zum Tab Body, wähle raw, und stelle sicher, dass JSON ausgewählt ist.
 6. Füge diesen Inhalt in den Body ein, wobei der angezeigte Token durch den generierten Token, die du im vorherigen Schritt kopiert hast, ersetzt wird:
 
-![alt text](image-9.png)
+![alt text](./images/image-9.png)
 7. Klicke auf Send.
 
 Erwartete Resultat:
 
-![alt text](image-10.png)
+![alt text](./images/image-10.png)
 
 #### Beschreibung der Ausgabe:
 - **"decoded"**: iat (Issued at) zeigt wenn der Token erstellt wurde und exp (Expiration) zeigt den Zeitpunkt, zu dem der Token abläuft.
@@ -261,7 +261,7 @@ Erwartete Resultat:
 
 Wenn der Token nicht gültig ist, erscheint eine Fehlermeldung wie:
 
-![alt text](image-11.png)
+![alt text](./images/image-11.png)
 
 ---
 
@@ -274,12 +274,12 @@ Mit einem gültigen Token können wir nun geschützte Daten abrufen.
 5. Gehe zum Tab Body, wähle raw, und stelle sicher, dass JSON ausgewählt ist.
 6. Füge diesen Inhalt in den Body ein, wobei der angezeigte Token durch den generierten Token, die du im vorherigen Schritt kopiert hast, ersetzt wird:
 
-![alt text](image-12.png)
+![alt text](./images/image-12.png)
 7. Klicke auf Send.
 
 Erwartete Antwort:
 
-![alt text](image-13.png)
+![alt text](./images/image-13.png)
 
 Der Zugriff wird nur gewährt, wenn der Token gültig ist.
 
@@ -290,7 +290,7 @@ Der Zugriff wird nur gewährt, wenn der Token gültig ist.
 
 Wenn der Token nicht gültig ist, wird die nachfolgende Fehlermeldung angezeigt:
 
-![alt text](image-14.png)
+![alt text](./images/image-14.png)
 
 ---
 
@@ -303,16 +303,16 @@ Hier rufen wir Benutzerprofile mit Benutzername und Passwort ab.
 5. Gehe zum Tab Body, wähle raw, und stelle sicher, dass JSON ausgewählt ist.
 6. Füge diesen Inhalt in den Body ein:
 
-![alt text](image-15.png)
+![alt text](./images/image-15.png)
 7. Klicke auf Send.
 
 Erwartete Resultat:
 
-![alt text](image-16.png)
+![alt text](./images/image-16.png)
 
 Wenn Benutzername oder Passwort nicht korrekt sind, wird eine Fehlermeldung angezeigt:
 
-![alt text](image-17.png)
+![alt text](./images/image-17.png)
 
 ---
 
