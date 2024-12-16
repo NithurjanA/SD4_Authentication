@@ -92,7 +92,7 @@ Dokumentiert das Projekt, einschließlich:
 
 ## **Voraussetzungen**
 
-1. **[Docker](https://www.docker.com/products/docker-desktop/)**: Version 20.10 oder neuer.  
+1. **[Docker](https://www.docker.com/products/docker-desktop/)**  
    Lade Docker Desktop für Windows, macOS oder Linux herunter, um Container zu erstellen und auszuführen.
 
 2. **[Postman](https://www.postman.com/downloads/)**: Für API-Tests.  
